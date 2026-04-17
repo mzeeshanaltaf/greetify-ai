@@ -17,8 +17,10 @@ const plans = [
       "Standard templates",
     ],
     cta: "Start Free",
+    href: "/signup",
     variant: "outline" as const,
     featured: false,
+    comingSoon: false,
   },
   {
     name: "Pro",
@@ -33,9 +35,11 @@ const plans = [
       "Multi-language support",
       "Priority generation",
     ],
-    cta: "Get Pro",
+    cta: "Coming Soon",
+    href: undefined,
     variant: "gold" as const,
     featured: true,
+    comingSoon: true,
   },
 ];
 
@@ -93,7 +97,7 @@ export default function CtaSection() {
             >
               {plan.featured && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-[#d4a853] to-[#c49240] text-[#0d0b18] text-xs font-bold tracking-wide">
-                  Most Popular
+                  {plan.comingSoon ? "Coming Soon" : "Most Popular"}
                 </div>
               )}
 
@@ -155,9 +159,11 @@ export default function CtaSection() {
               <GradientButton
                 variant={plan.variant}
                 size="md"
+                href={plan.href}
+                disabled={plan.comingSoon}
                 className="w-full justify-center"
               >
-                {plan.featured && <Sparkles className="w-4 h-4" />}
+                {plan.featured && !plan.comingSoon && <Sparkles className="w-4 h-4" />}
                 {plan.cta}
               </GradientButton>
             </motion.div>
