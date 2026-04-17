@@ -1,6 +1,8 @@
-import { pgTable, text, timestamp, boolean, uuid, varchar, integer, index } from "drizzle-orm/pg-core";
+import { pgSchema, text, timestamp, boolean, uuid, varchar, integer, index } from "drizzle-orm/pg-core";
 
-export const user = pgTable("user", {
+export const greetifySchema = pgSchema("greetify");
+
+export const user = greetifySchema.table("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
@@ -11,7 +13,7 @@ export const user = pgTable("user", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
-export const session = pgTable("session", {
+export const session = greetifySchema.table("session", {
   id: text("id").primaryKey(),
   userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
   token: text("token").notNull().unique(),
@@ -22,7 +24,7 @@ export const session = pgTable("session", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
-export const account = pgTable("account", {
+export const account = greetifySchema.table("account", {
   id: text("id").primaryKey(),
   userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
   accountId: text("account_id").notNull(),
@@ -38,7 +40,7 @@ export const account = pgTable("account", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
-export const verification = pgTable("verification", {
+export const verification = greetifySchema.table("verification", {
   id: text("id").primaryKey(),
   identifier: text("identifier").notNull(),
   value: text("value").notNull(),
@@ -47,7 +49,7 @@ export const verification = pgTable("verification", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
-export const cards = pgTable(
+export const cards = greetifySchema.table(
   "cards",
   {
     id: uuid("id").defaultRandom().primaryKey(),
