@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { Trash2, RefreshCw, Loader2, ImageIcon, AlertCircle } from "lucide-react";
+import { Trash2, RefreshCw, Loader2, ImageIcon, AlertCircle, Download, ExternalLink } from "lucide-react";
 import type { Card } from "@/lib/db/schema";
 
 const OUTPUT_LABELS: Record<string, string> = {
@@ -20,6 +20,7 @@ export default function LibraryClient({ initialCards, initialNextCursor }: Props
   const [nextCursor, setNextCursor] = useState<string | null>(initialNextCursor);
   const [loadingMore, setLoadingMore] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [confirmDelete, setConfirmDelete] = useState<Card | null>(null);
   const [error, setError] = useState("");
 
   const loadMore = useCallback(async () => {
@@ -42,17 +43,15 @@ export default function LibraryClient({ initialCards, initialNextCursor }: Props
   const handleDelete = async (id: string) => {
     setDeletingId(id);
     setError("");
-    // Optimistic removal
+    setConfirmDelete(null);
     setCards((prev) => prev.filter((c) => c.id !== id));
     try {
       const res = await fetch(`/api/cards/${id}`, { method: "DELETE" });
       if (!res.ok && res.status !== 204) {
-        // Restore on failure
         const data = await res.json().catch(() => ({}));
         throw new Error(data.message ?? "Failed to delete card.");
       }
     } catch (err) {
-      // Restore card
       setCards((prev) => {
         const card = initialCards.find((c) => c.id === id);
         return card ? [...prev, card].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) : prev;
@@ -94,7 +93,7 @@ export default function LibraryClient({ initialCards, initialNextCursor }: Props
             key={card.id}
             card={card}
             isDeleting={deletingId === card.id}
-            onDelete={handleDelete}
+            onRequestDelete={() => setConfirmDelete(card)}
           />
         ))}
       </div>
@@ -118,6 +117,14 @@ export default function LibraryClient({ initialCards, initialNextCursor }: Props
           </button>
         </div>
       )}
+
+      {confirmDelete && (
+        <ConfirmDeleteDialog
+          card={confirmDelete}
+          onCancel={() => setConfirmDelete(null)}
+          onConfirm={() => handleDelete(confirmDelete.id)}
+        />
+      )}
     </div>
   );
 }
@@ -125,11 +132,11 @@ export default function LibraryClient({ initialCards, initialNextCursor }: Props
 function CardTile({
   card,
   isDeleting,
-  onDelete,
+  onRequestDelete,
 }: {
   card: Card;
   isDeleting: boolean;
-  onDelete: (id: string) => void;
+  onRequestDelete: () => void;
 }) {
   const date = new Date(card.createdAt).toLocaleDateString(undefined, {
     month: "short",
@@ -137,22 +144,23 @@ function CardTile({
     year: "numeric",
   });
 
+  const filename = `greetify-${card.occasion}-${card.id.slice(0, 8)}.png`;
+
   return (
     <div
       className={`group relative rounded-2xl overflow-hidden border border-[#0d0b18]/10 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all ${
         isDeleting ? "opacity-40 pointer-events-none" : "hover:shadow-[0_4px_20px_rgba(0,0,0,0.12)]"
       }`}
     >
-      {/* Thumbnail */}
-      <div className="aspect-square overflow-hidden bg-[#f7f3ee]">
+      <div className="aspect-square overflow-hidden bg-[#f7f3ee] pointer-events-none select-none">
         <img
           src={card.imageUrl}
           alt={card.occasion}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          draggable={false}
+          className="w-full h-full object-cover"
         />
       </div>
 
-      {/* Info */}
       <div className="p-3">
         <p className="text-xs font-semibold text-[#0d0b18] truncate capitalize">
           {card.occasion.replace(/-/g, " ")}
@@ -164,19 +172,28 @@ function CardTile({
         </div>
       </div>
 
-      {/* Hover actions */}
-      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 p-3">
+      <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-stretch justify-center gap-2 p-3">
         <a
-          href={`/dashboard?from=${card.id}`}
-          className="flex items-center gap-1.5 w-full justify-center px-3 py-2 rounded-full bg-white text-[#0d0b18] text-xs font-bold hover:bg-[#f7f3ee] transition-colors"
+          href={card.imageUrl}
+          download={filename}
+          className="flex items-center gap-1.5 justify-center px-3 py-2 rounded-full bg-white text-[#0d0b18] text-xs font-bold hover:bg-[#f7f3ee] transition-colors"
         >
-          <RefreshCw className="w-3 h-3" />
-          Use again
+          <Download className="w-3 h-3" />
+          Download
+        </a>
+        <a
+          href={card.imageUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 justify-center px-3 py-2 rounded-full bg-white/90 text-[#0d0b18] text-xs font-bold hover:bg-white transition-colors"
+        >
+          <ExternalLink className="w-3 h-3" />
+          Open in new tab
         </a>
         <button
           type="button"
-          onClick={() => onDelete(card.id)}
-          className="flex items-center gap-1.5 w-full justify-center px-3 py-2 rounded-full bg-red-500/80 text-white text-xs font-bold hover:bg-red-500 transition-colors cursor-pointer"
+          onClick={onRequestDelete}
+          className="flex items-center gap-1.5 justify-center px-3 py-2 rounded-full bg-red-500/85 text-white text-xs font-bold hover:bg-red-500 transition-colors cursor-pointer"
         >
           {isDeleting ? (
             <Loader2 className="w-3 h-3 animate-spin" />
@@ -185,6 +202,68 @@ function CardTile({
           )}
           Delete
         </button>
+      </div>
+    </div>
+  );
+}
+
+function ConfirmDeleteDialog({
+  card,
+  onCancel,
+  onConfirm,
+}: {
+  card: Card;
+  onCancel: () => void;
+  onConfirm: () => void;
+}) {
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="confirm-delete-title"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+      onClick={onCancel}
+    >
+      <div
+        className="w-full max-w-sm rounded-2xl bg-white shadow-[0_20px_60px_rgba(0,0,0,0.3)] p-6"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start gap-3">
+          <div className="w-10 h-10 rounded-full bg-red-50 border border-red-100 flex items-center justify-center shrink-0">
+            <Trash2 className="w-5 h-5 text-red-500" />
+          </div>
+          <div className="flex-1">
+            <h3
+              id="confirm-delete-title"
+              className="text-base font-semibold text-[#0d0b18]"
+              style={{ fontFamily: "var(--font-display), serif" }}
+            >
+              Delete this card?
+            </h3>
+            <p className="text-sm text-[#7a6f66] mt-1 capitalize">
+              {card.occasion.replace(/-/g, " ")} · {OUTPUT_LABELS[card.outputType] ?? card.outputType}
+            </p>
+            <p className="text-xs text-[#7a6f66] mt-3">
+              This will permanently remove the card from your library. This action cannot be undone.
+            </p>
+          </div>
+        </div>
+        <div className="flex justify-end gap-2 mt-6">
+          <button
+            type="button"
+            onClick={onCancel}
+            className="px-4 py-2 rounded-full text-sm font-semibold text-[#3d3530] hover:bg-[#0d0b18]/5 transition-colors cursor-pointer"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={onConfirm}
+            className="px-4 py-2 rounded-full text-sm font-semibold bg-red-500 text-white hover:bg-red-600 transition-colors cursor-pointer"
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   );

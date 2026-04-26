@@ -111,22 +111,17 @@ export default function StatsClient({ stats, recentCards }: Props) {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {recentCards.map((card) => (
-              <a
+              <div
                 key={card.id}
-                href={`/dashboard?from=${card.id}`}
-                className="group relative aspect-square rounded-xl overflow-hidden border border-[#0d0b18]/10 hover:border-[#d4a853]/50 transition-all"
+                className="aspect-square rounded-xl overflow-hidden border border-[#0d0b18]/10 bg-[#f7f3ee] pointer-events-none select-none"
               >
                 <img
                   src={card.imageUrl}
                   alt={card.occasion}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  draggable={false}
+                  className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
-                  <span className="text-xs text-white font-medium truncate">
-                    {card.occasion}
-                  </span>
-                </div>
-              </a>
+              </div>
             ))}
           </div>
         </div>
