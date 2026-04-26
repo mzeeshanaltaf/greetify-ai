@@ -2,7 +2,7 @@ import OpenAI from "openai";
 import { buildPrompt } from "./prompts";
 import type { GenerateCardInput, OutputType } from "@/lib/validation/cards";
 
-const MODEL = "gpt-image-2";
+const MODEL = "gpt-image-1.5";
 
 const SIZE_BY_OUTPUT: Record<OutputType, "1024x1024" | "1024x1536" | "1536x1024"> = {
   ecard: "1024x1024",

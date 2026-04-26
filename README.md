@@ -27,7 +27,7 @@ Greetify is a full-stack web app that generates personalized greeting cards powe
 |---|---|
 | Framework | Next.js 16 (App Router) |
 | UI | React 19, Tailwind CSS v4, Lucide Icons |
-| AI | OpenAI Image API (`openai`, model: `gpt-image-2`) |
+| AI | OpenAI Image API (`openai`, model: `gpt-image-1.5`) |
 | Auth | Better Auth (email + Google OAuth) |
 | Database | PostgreSQL + Drizzle ORM |
 | Storage | Vercel Blob |
