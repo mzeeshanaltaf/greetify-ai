@@ -30,11 +30,9 @@ export function describeInput(input: GenerateCardInput) {
   const toneLabel = TONE_LABELS[input.tone] ?? input.tone;
   const languageLabel = LANGUAGE_LABELS[input.language] ?? input.language;
 
-  const recipient = input.recipientName?.trim() || "a loved one";
-  const sender = input.senderName?.trim() || "a friend";
-  const customMessage =
-    input.customMessage?.trim() ||
-    `a heartfelt ${toneLabel} greeting appropriate for ${occasionLabel}`;
+  const recipient = input.recipientName?.trim() || undefined;
+  const sender = input.senderName?.trim() || undefined;
+  const customMessage = input.customMessage?.trim() || undefined;
 
   return {
     occasionLabel,
@@ -45,4 +43,17 @@ export function describeInput(input: GenerateCardInput) {
     sender,
     customMessage,
   };
+}
+
+export function buildPersonalisation(d: {
+  recipient?: string;
+  sender?: string;
+  customMessage?: string;
+}, messageLeadIn: string): string {
+  const lines = [
+    d.recipient && `Recipient: ${d.recipient}`,
+    d.sender && `From: ${d.sender}`,
+    d.customMessage && `${messageLeadIn} "${d.customMessage}"`,
+  ].filter(Boolean);
+  return lines.length ? lines.join("\n") + "\n\n" : "";
 }

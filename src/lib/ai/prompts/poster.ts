@@ -1,18 +1,18 @@
 import type { GenerateCardInput } from "@/lib/validation/cards";
-import { describeInput } from "./shared";
+import { describeInput, buildPersonalisation } from "./shared";
 
 export function buildPosterPrompt(input: GenerateCardInput): string {
   const d = describeInput(input);
+  const personalisation = buildPersonalisation(
+    d,
+    "Incorporate this personal message prominently in the poster layout:",
+  );
 
   return `Create a printable greeting poster for ${d.occasionLabel} rendered in the "${d.templateLabel}" visual style.
 
 Tone: ${d.toneLabel}.
 Language for any rendered text on the image: ${d.languageLabel}.
-Recipient: ${d.recipient}
-From: ${d.sender}
-Incorporate this personal message prominently in the poster layout: "${d.customMessage}"
-
-Design requirements:
+${personalisation}Design requirements:
 - 3:4 portrait aspect ratio, print-ready at high resolution (A4/Letter proportions).
 - A clear focal hierarchy: dominant headline, supporting greeting body, and refined names block.
 - Typography must be print-quality: crisp, kerned, legible from across a room.
