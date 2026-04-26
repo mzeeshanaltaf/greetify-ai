@@ -58,7 +58,7 @@ export default function PrivacyPolicyPage() {
                 <li>
                   <strong>Card Content:</strong> The recipient name, occasion details, tone
                   preference, and any custom text you provide when generating a card. This
-                  data is sent to Google Gemini AI to generate your card and is not stored
+                  data is sent to OpenAI to generate your card and is not stored
                   permanently on our servers unless you are a registered user.
                 </li>
               </ul>
@@ -84,8 +84,8 @@ export default function PrivacyPolicyPage() {
               </p>
               <ul>
                 <li>
-                  <strong>Google Gemini AI:</strong> Card content data is processed by
-                  Google&apos;s Gemini API. Refer to Google&apos;s Privacy Policy for their data
+                  <strong>OpenAI:</strong> Card content data is processed by OpenAI&apos;s
+                  image generation API. Refer to OpenAI&apos;s Privacy Policy for their data
                   handling practices.
                 </li>
                 <li>

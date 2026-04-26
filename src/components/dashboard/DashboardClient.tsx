@@ -12,6 +12,7 @@ import {
   Zap,
 } from "lucide-react";
 import { OCCASION_TEMPLATES } from "@/lib/constants/card-types";
+import { buildPrompt } from "@/lib/ai/prompts";
 import {
   TONES,
   OUTPUT_TYPES,
@@ -72,6 +73,23 @@ export default function DashboardClient({ userName, initialCredits }: Props) {
   const [recipientName, setRecipientName] = useState("");
   const [senderName, setSenderName] = useState("");
   const [customMessage, setCustomMessage] = useState("");
+
+  const livePrompt = useMemo(
+    () =>
+      templateId
+        ? buildPrompt({
+            occasion,
+            templateId,
+            tone,
+            outputType,
+            language,
+            recipientName: recipientName.trim() || undefined,
+            senderName: senderName.trim() || undefined,
+            customMessage: customMessage.trim() || undefined,
+          })
+        : "",
+    [occasion, templateId, tone, outputType, language, recipientName, senderName, customMessage],
+  );
 
   const [credits, setCredits] = useState(initialCredits);
 
@@ -244,7 +262,7 @@ export default function DashboardClient({ userName, initialCredits }: Props) {
             Welcome back, {userName.split(" ")[0]}.
           </h1>
           <p className="text-sm text-[#7a6f66] mt-2 max-w-xl">
-            Pick an occasion, set the vibe, and let Gemini draw a card worth keeping.
+            Pick an occasion, set the vibe, and let OpenAI draw a card worth keeping.
           </p>
         </div>
         <div className="flex items-center gap-2 mt-2">
@@ -388,6 +406,20 @@ export default function DashboardClient({ userName, initialCredits }: Props) {
               {customMessage.length}/500
             </p>
           </div>
+
+          {livePrompt && (
+            <details className="mt-5 group rounded-xl border border-[#0d0b18]/10 bg-[#f7f3ee]/60 overflow-hidden">
+              <summary className="cursor-pointer select-none px-4 py-3 text-xs font-semibold tracking-wider uppercase text-[#a07830] flex items-center justify-between gap-2">
+                <span>Prompt Preview</span>
+                <span className="text-[10px] text-[#7a6f66] normal-case tracking-normal font-normal">
+                  Updates live · Sent to OpenAI
+                </span>
+              </summary>
+              <pre className="px-4 pb-4 text-[11px] leading-relaxed text-[#3d3530] whitespace-pre-wrap font-mono max-h-64 overflow-y-auto">
+                {livePrompt}
+              </pre>
+            </details>
+          )}
 
           {status === "error" && (
             <div className="flex items-start gap-2 px-4 py-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs mt-4">

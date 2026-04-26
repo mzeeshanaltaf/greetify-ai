@@ -19,7 +19,7 @@ const steps = [
     icon: Wand2,
     title: "Customize with AI",
     description:
-      "Enter the recipient's name, choose a tone (Romantic, Funny, Poetic, Islamic...) and let Gemini AI craft the perfect message.",
+      "Enter the recipient's name, choose a tone (Romantic, Funny, Poetic, Islamic...) and let OpenAI craft the perfect message.",
     detail: "9 tone styles",
     color: "#e86f4e",
     bgColor: "rgba(232, 111, 78, 0.08)",

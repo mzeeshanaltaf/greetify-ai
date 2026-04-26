@@ -95,7 +95,7 @@ export default function HeroSection() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#d4a853] opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#d4a853]" />
               </span>
-              Powered by Google Nano Banana
+              Powered by OpenAI&apos;s Next-Gen Image Model
             </motion.div>
 
             {/* Headline */}

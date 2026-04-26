@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireUser } from "@/lib/auth/guard";
 import { GenerateCardSchema } from "@/lib/validation/cards";
-import { generateCard } from "@/lib/ai/gemini";
+import { generateCard } from "@/lib/ai/openai";
 import { deductCredit, refundCredit } from "@/lib/credits/deduct";
 
 export const runtime = "nodejs";
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     );
   }
 
-  // Deduct 1 credit atomically before calling Gemini
+  // Deduct 1 credit atomically before calling OpenAI
   const newBalance = await deductCredit(user.id);
   if (newBalance === null) {
     return NextResponse.json(

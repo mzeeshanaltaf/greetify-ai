@@ -109,7 +109,7 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-1 text-xs text-[#f7f3ee]/25">
               <span>Powered by</span>
-              <span className="gradient-text-gold font-semibold">Google Nano Banana</span>
+              <span className="gradient-text-gold font-semibold">OpenAI&apos;s Next-Gen Image Model</span>
             </div>
           </div>
         </div>

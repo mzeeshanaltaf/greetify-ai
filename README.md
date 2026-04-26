@@ -1,12 +1,13 @@
 # Greetify — AI-Crafted Cards for Every Celebration
 
-Greetify is a full-stack web app that generates personalized greeting cards powered by **Google Gemini AI**. Pick an occasion, set the vibe, and get a ready-to-download card in seconds.
+Greetify is a full-stack web app that generates personalized greeting cards powered by **OpenAI's Next-Gen Image Model**. Pick an occasion, set the vibe, and get a ready-to-download card in seconds.
 
 ---
 
 ## Features
 
-- **AI Card Generation** — Google Gemini AI draws a unique card for every request
+- **AI Card Generation** — OpenAI's image generation model draws a unique card for every request
+- **Live Prompt Preview** — see exactly what's sent to the AI as you tweak settings
 - **50+ Occasions** — Eid, Ramadan, Christmas, Diwali, birthdays, weddings, Valentine's Day, and more
 - **3 Output Formats** — E-Card (1:1 square), Poster (3:4 portrait), Flyer (16:9 landscape)
 - **9 Tones** — Emotional, Professional, Funny, Romantic, Islamic, Inspirational, Respectful, Short & Sweet, Poetic
@@ -26,7 +27,7 @@ Greetify is a full-stack web app that generates personalized greeting cards powe
 |---|---|
 | Framework | Next.js 16 (App Router) |
 | UI | React 19, Tailwind CSS v4, Lucide Icons |
-| AI | Google Gemini AI (`@google/genai`) |
+| AI | OpenAI Image API (`openai`, model: `gpt-image-2`) |
 | Auth | Better Auth (email + Google OAuth) |
 | Database | PostgreSQL + Drizzle ORM |
 | Storage | Vercel Blob |
@@ -56,7 +57,7 @@ src/
 │   ├── shared/                   # CreditsBadge, GradientButton
 │   └── stats/                    # StatsClient
 └── lib/
-    ├── ai/                       # Gemini prompt builder & image generator
+    ├── ai/                       # OpenAI prompt builder & image generator
     ├── auth/                     # Better Auth config + client
     ├── constants/                # Occasion templates catalogue
     ├── credits/                  # Credit deduction logic
@@ -73,7 +74,7 @@ src/
 
 - Node.js 20+
 - PostgreSQL database
-- Google Gemini API key
+- OpenAI API key
 - Google OAuth credentials (optional)
 - Vercel Blob store (optional — for saving cards)
 
@@ -101,8 +102,8 @@ BETTER_AUTH_URL=http://localhost:3000
 GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
 
-# Google Gemini AI
-GEMINI_API_KEY=your-gemini-api-key
+# OpenAI
+OPENAI_API_KEY=your-openai-api-key
 
 # Vercel Blob (for saving card images)
 BLOB_READ_WRITE_TOKEN=your-vercel-blob-token
@@ -149,7 +150,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 1. **Sign up** — get 5 free credits
 2. **Choose** — select occasion, template, tone, language, and output format
 3. **Personalise** — add recipient/sender names and a custom message
-4. **Generate** — Gemini AI draws a card and returns it as a base64 PNG
+4. **Generate** — OpenAI's image model draws a card and returns it as a base64 PNG
 5. **Save or Download** — save to your library or download the PNG immediately
 6. **Reuse** — click any library card to pre-fill the form and iterate
 

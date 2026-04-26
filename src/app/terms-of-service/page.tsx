@@ -43,7 +43,7 @@ export default function TermsOfServicePage() {
               <p>
                 Greetify is an AI-powered greeting card generation platform that allows
                 users to create personalised digital greeting cards for various occasions
-                using Google Gemini AI. The Service enables users to generate card text,
+                using OpenAI&apos;s image generation model. The Service enables users to generate card text,
                 select templates, and download or share the resulting cards.
               </p>
             </Section>

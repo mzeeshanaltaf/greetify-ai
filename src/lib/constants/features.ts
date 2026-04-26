@@ -11,7 +11,7 @@ export const FEATURES: Feature[] = [
     id: "ai-text",
     title: "AI-Crafted Messages",
     description:
-      "Choose your tone — Emotional, Funny, Romantic, Islamic, Poetic — and let Gemini AI write the perfect words for your occasion.",
+      "Choose your tone — Emotional, Funny, Romantic, Islamic, Poetic — and let OpenAI write the perfect words for your occasion.",
     icon: "Sparkles",
     color: "text-amber-400",
   },

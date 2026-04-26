@@ -109,7 +109,7 @@ export default function CookiePolicyPage() {
               </p>
               <ul>
                 <li>
-                  <strong>Google:</strong> Used for AI features (Gemini API). Google may
+                  <strong>OpenAI:</strong> Used for AI features (image generation API). OpenAI may
                   set their own cookies as part of API requests.
                 </li>
                 <li>

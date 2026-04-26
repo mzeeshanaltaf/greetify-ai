@@ -28,7 +28,7 @@ const values = [
     icon: Zap,
     title: "Effortless Creation",
     description:
-      "A meaningful card shouldn't take hours. We harness Google Gemini AI so your message goes from idea to beautiful card in seconds.",
+      "A meaningful card shouldn't take hours. We harness OpenAI's image generation model so your message goes from idea to beautiful card in seconds.",
     color: "#7c6bd6",
   },
   {
@@ -98,10 +98,10 @@ export default function AboutPage() {
                 everything.
               </p>
               <p className="text-[#7a6f66] leading-relaxed">
-                Today, Greetify uses Google Gemini to craft unique, heartfelt messages
+                Today, Greetify uses OpenAI&apos;s image generation model to craft unique, heartfelt cards
                 tailored to the occasion, the recipient&apos;s personality, and the tone you
-                choose — then pairs that message with a professionally designed card
-                template. The result: something genuinely special, in under a minute.
+                choose — rendered as a beautifully composed image in a professionally
+                designed style. The result: something genuinely special, in under a minute.
               </p>
             </div>
 
@@ -193,13 +193,12 @@ export default function AboutPage() {
             className="text-4xl font-bold text-[#0d0b18] mb-5"
             style={{ fontFamily: "var(--font-display), serif" }}
           >
-            Powered by Google Gemini AI
+            Powered by OpenAI&apos;s Next-Gen Image Model
           </h2>
           <p className="text-[#7a6f66] leading-relaxed max-w-2xl mx-auto mb-8">
-            We use Google&apos;s Gemini model — one of the world&apos;s most capable
-            multimodal AI systems — to generate both the text content and the visual
-            imagery for each card. Every output is unique; no two cards are ever
-            identical.
+            We use OpenAI&apos;s next-generation image model — one of the world&apos;s most
+            capable AI systems — to generate the visual imagery for each card. Every
+            output is unique; no two cards are ever identical.
           </p>
           <a
             href="/"
