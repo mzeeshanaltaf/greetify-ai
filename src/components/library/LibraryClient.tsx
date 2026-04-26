@@ -146,6 +146,25 @@ function CardTile({
 
   const filename = `greetify-${card.occasion}-${card.id.slice(0, 8)}.png`;
 
+  const handleDownload = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(card.imageUrl);
+      if (!res.ok) throw new Error("fetch failed");
+      const blob = await res.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = objectUrl;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(objectUrl);
+    } catch {
+      window.open(card.imageUrl, "_blank", "noopener,noreferrer");
+    }
+  };
+
   return (
     <div
       className={`group relative rounded-2xl overflow-hidden border border-[#0d0b18]/10 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-all ${
@@ -173,14 +192,14 @@ function CardTile({
       </div>
 
       <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-stretch justify-center gap-2 p-3">
-        <a
-          href={card.imageUrl}
-          download={filename}
-          className="flex items-center gap-1.5 justify-center px-3 py-2 rounded-full bg-white text-[#0d0b18] text-xs font-bold hover:bg-[#f7f3ee] transition-colors"
+        <button
+          type="button"
+          onClick={handleDownload}
+          className="flex items-center gap-1.5 justify-center px-3 py-2 rounded-full bg-white text-[#0d0b18] text-xs font-bold hover:bg-[#f7f3ee] transition-colors cursor-pointer"
         >
           <Download className="w-3 h-3" />
           Download
-        </a>
+        </button>
         <a
           href={card.imageUrl}
           target="_blank"
