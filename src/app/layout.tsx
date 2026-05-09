@@ -19,7 +19,7 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL("https://greetify.zeeshanai.cloud"),
   title: {
-    default: "Greetify — AI-Crafted Cards for Every Celebration",
+    default: "Greetify — AI-Crafted Greeting Cards for Every Occasion",
     template: "%s — Greetify",
   },
   description:
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Greetify",
-    title: "Greetify — AI-Crafted Cards for Every Celebration",
+    title: "Greetify — AI-Crafted Greeting Cards for Every Occasion",
     description:
       "Generate stunning, personalized greeting cards with AI. 100+ templates for every occasion — Eid, Christmas, Birthdays, Weddings and more.",
     url: "https://greetify.zeeshanai.cloud",
@@ -52,13 +52,13 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Greetify — AI-Crafted Cards for Every Celebration",
+        alt: "Greetify — AI-Crafted Greeting Cards for Every Occasion",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Greetify — AI-Crafted Cards for Every Celebration",
+    title: "Greetify — AI-Crafted Greeting Cards for Every Occasion",
     description:
       "Generate stunning, personalized greeting cards with AI. 100+ templates for every occasion.",
     images: ["/opengraph-image"],

@@ -79,7 +79,25 @@ export default function OpenGraphImage() {
             lineHeight: 1.4,
           }}
         >
-          AI-Crafted Cards for Every Celebration
+          AI-Crafted Greeting Cards for Every Occasion
+        </div>
+        {/* CTA */}
+        <div
+          style={{
+            marginTop: 40,
+            display: "flex",
+            alignItems: "center",
+            padding: "12px 32px",
+            borderRadius: 100,
+            background: "linear-gradient(135deg, #d4a853 0%, #c49240 100%)",
+            color: "#0d0b18",
+            fontSize: 22,
+            fontWeight: 700,
+            fontFamily: "sans-serif",
+            letterSpacing: 0.3,
+          }}
+        >
+          Try it free →
         </div>
         {/* Bottom accent bar */}
         <div
