@@ -3,8 +3,9 @@ import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 
 export const metadata: Metadata = {
-  title: "Terms of Service — Greetify",
+  title: "Terms of Service",
   description: "The terms and conditions governing your use of Greetify.",
+  alternates: { canonical: "https://greetify.zeeshanai.cloud/terms-of-service" },
 };
 
 const LAST_UPDATED = "April 15, 2026";

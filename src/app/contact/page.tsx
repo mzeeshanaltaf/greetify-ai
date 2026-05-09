@@ -4,8 +4,19 @@ import Footer from "@/components/landing/Footer";
 import ContactForm from "@/components/landing/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact Us — Greetify",
+  title: "Contact Us",
   description: "Get in touch with the Greetify team. We'd love to hear from you.",
+  openGraph: {
+    title: "Contact Greetify",
+    description: "Have a question or feedback? Get in touch with the Greetify team.",
+    url: "https://greetify.zeeshanai.cloud/contact",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Greetify",
+    description: "Have a question or feedback? Get in touch with the Greetify team.",
+  },
+  alternates: { canonical: "https://greetify.zeeshanai.cloud/contact" },
 };
 
 const ERROR_MESSAGES: Record<string, string> = {

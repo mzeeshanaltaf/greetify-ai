@@ -7,8 +7,9 @@ import LoginForm from "@/components/auth/LoginForm";
 import { auth } from "@/lib/auth";
 
 export const metadata: Metadata = {
-  title: "Sign in — Greetify",
+  title: "Sign in",
   description: "Sign in to your Greetify account.",
+  robots: { index: false, follow: false },
 };
 
 const ERROR_MESSAGES: Record<string, string> = {

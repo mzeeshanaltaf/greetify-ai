@@ -18,6 +18,7 @@ Greetify is a full-stack web app that generates personalized greeting cards powe
 - **Credit System** — 5 free credits on sign-up; each generation spends 1 credit
 - **Authentication** — Email/password + Google OAuth via Better Auth
 - **Download** — Export any card as a PNG
+- **SEO-ready** — Dynamic `sitemap.xml`, `robots.txt`, Open Graph image, Twitter card, canonical URLs, and JSON-LD structured data (`Organization` + `WebApplication`)
 
 ---
 
@@ -48,6 +49,9 @@ src/
 │   ├── library/                  # Saved cards browser
 │   ├── stats/                    # Activity & credit stats
 │   ├── about/, contact/, ...     # Marketing/legal pages
+│   ├── opengraph-image.tsx       # Dynamic OG/Twitter share image (1200×630)
+│   ├── robots.ts                 # Dynamic robots.txt
+│   ├── sitemap.ts                # Dynamic sitemap.xml
 │   └── page.tsx                  # Landing page
 ├── components/
 │   ├── auth/                     # LoginForm, SignupForm

@@ -7,8 +7,9 @@ import SignupForm from "@/components/auth/SignupForm";
 import { auth } from "@/lib/auth";
 
 export const metadata: Metadata = {
-  title: "Create your account — Greetify",
+  title: "Create your account",
   description: "Sign up to start creating AI-powered greeting cards.",
+  robots: { index: false, follow: false },
 };
 
 const ERROR_MESSAGES: Record<string, string> = {

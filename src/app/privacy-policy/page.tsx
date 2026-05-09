@@ -3,8 +3,9 @@ import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Greetify",
+  title: "Privacy Policy",
   description: "How Greetify collects, uses, and protects your personal information.",
+  alternates: { canonical: "https://greetify.zeeshanai.cloud/privacy-policy" },
 };
 
 const LAST_UPDATED = "April 15, 2026";

@@ -3,8 +3,9 @@ import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy — Greetify",
+  title: "Cookie Policy",
   description: "How Greetify uses cookies and similar tracking technologies.",
+  alternates: { canonical: "https://greetify.zeeshanai.cloud/cookie-policy" },
 };
 
 const LAST_UPDATED = "April 15, 2026";

@@ -7,8 +7,9 @@ import Footer from "@/components/landing/Footer";
 import { auth } from "@/lib/auth";
 
 export const metadata: Metadata = {
-  title: "Dashboard — Greetify",
+  title: "Dashboard",
   description: "Generate and save AI-powered greeting cards.",
+  robots: { index: false, follow: false },
 };
 
 export default async function DashboardPage() {

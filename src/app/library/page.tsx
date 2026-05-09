@@ -10,8 +10,9 @@ import { db } from "@/lib/db";
 import { cards } from "@/lib/db/schema";
 
 export const metadata: Metadata = {
-  title: "Library — Greetify",
+  title: "Library",
   description: "Browse and manage your saved greeting cards.",
+  robots: { index: false, follow: false },
 };
 
 const PAGE_LIMIT = 20;

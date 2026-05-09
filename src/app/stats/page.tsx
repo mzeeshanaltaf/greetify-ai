@@ -8,8 +8,9 @@ import { auth } from "@/lib/auth";
 import { getUserStats, getRecentCards } from "@/lib/db/queries/stats";
 
 export const metadata: Metadata = {
-  title: "Stats — Greetify",
+  title: "Stats",
   description: "Your card generation activity and credit balance.",
+  robots: { index: false, follow: false },
 };
 
 export default async function StatsPage() {

@@ -4,9 +4,21 @@ import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 
 export const metadata: Metadata = {
-  title: "About — Greetify",
+  title: "About",
   description:
     "Learn about Greetify's mission to make heartfelt, AI-powered greeting cards accessible for every occasion and every culture.",
+  openGraph: {
+    title: "About Greetify — Our Story and Mission",
+    description:
+      "Greetify was built to make every celebration feel personal. Learn how AI-powered greeting cards are changing the way people connect.",
+    url: "https://greetify.zeeshanai.cloud/about",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Greetify — Our Story and Mission",
+    description: "Greetify was built to make every celebration feel personal.",
+  },
+  alternates: { canonical: "https://greetify.zeeshanai.cloud/about" },
 };
 
 const values = [
